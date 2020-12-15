@@ -8,39 +8,34 @@ $amzius = $metai - $gimimoMetai;
 echo "<h1>1UZDUOTIS</h1>";
 echo "As esu $vardas $pavarde. Man yra $amzius metai <br>";
 
-// $skaicius1 = rand(0, 4);
-// $skaicius2 = rand(0, 4);
-// if ($skaiciu1 = 0 || $skaiciu2 = 0) {
-//     $rezultatas= 0;
-// } if ($skaiciu2 = 0) {
-//     $rezultatas = 0;
-// } else if ($skaicius1 > $skaicius2) {
-//     $rezultatas = $skaicius1 / $skaicius2;
-// } else {
-//     $rezultatas = $skaicius2 / $skaicius1;
-// }
-// echo "<h1>2UZDUOTIS</h1>";
-// echo round($rezultatas, 2);
+echo "<h1>2UZDUOTIS</h1>";
+$skaicius1 = rand(0, 4);
+$skaicius2 = rand(0, 4);
+if ($skaiciu1 = 0 || $skaiciu2 = 0) {
+    $rezultatas = 0;
+} elseif ($skaicius1 > $skaicius2) {
+    $rezultatas = $skaicius1 / $skaicius2;
+} elseif ($skaicius1 < $skaicius2) {
+    $rezultatas = $skaicius2 / $skaicius1;
+}
+echo round($rezultatas, 2);
+
+
 echo "<h1>3UZDUOTIS</h1>";
 $pirmas = rand(0, 25);
 $antras = rand(0, 25);
 $trecias = rand(0, 25);
 if ($pirmas > $antras && $pirmas < $trecias) {
     echo $antras;
-}
-if ($trecias > $antras && $pirmas < $pirmas) {
+} elseif ($trecias > $antras && $pirmas < $pirmas) {
     echo $antras;
-}
-if ($antras > $trecias && $antras < $pirmas) {
+} elseif ($antras > $trecias && $antras < $pirmas) {
     echo $antras;
-}
-if ($pirmas > $trecias && $antras < $antras) {
+} elseif ($pirmas > $trecias && $antras < $antras) {
     echo $antras;
-}
-if ($pirmas > $pirmas && $trecias < $antras) {
+} elseif ($pirmas > $pirmas && $trecias < $antras) {
     echo $antras;
-}
-if ($antras > $pirmas && $trecias < $pirmas) {
+} elseif ($antras > $pirmas && $trecias < $pirmas) {
     echo $antras;
 }
 // echo "<h1>4UZDUOTIS</h1>";
