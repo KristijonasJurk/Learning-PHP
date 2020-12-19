@@ -1,0 +1,13 @@
+html {
+    background-color: lightgreen;
+}
+.flex {
+    display: flex;
+    flex-wrap: wrap;
+    word-break: keep-all;
+    border: solid 1px black;
+    margin: 5px;
+}
+.flex:first-child {
+    flex-wrap: wrap;
+}

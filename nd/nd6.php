@@ -140,8 +140,105 @@ function renderArray($times)
 }
 
 print_r($pirmas);
-print_r(renderLast($random1));
-// foreach ($paskutinis as $key => $item) {
-//     $paskutinis[] = $random1;
-//     if ($key == $paskutinis)
+///////////////////////////////////////////
+echo '<br>8 uzduotis<br>';
+// Suskaičiuokite septinto uždavinio elementų, 
+// kurie nėra masyvai, sumą.
+function getsum($pirmas)
+{
+    $suma = 0;
+    foreach ($pirmas as $value) {
+        if (is_numeric($value)) {
+            $suma += $value;
+        } elseif (is_array($value)) {
+            $next = getsum($value);
+            $suma += $next['suma'];
+        }
+    }
+    return ['suma' => $suma];
+}
+print_r(getsum($pirmas));
+///////////////////////////////////////////
+echo '<br>9 uzduotis<br>';
+// Sugeneruokite masyvą iš trijų elementų, kurie yra atsitiktiniai 
+// skaičiai nuo 1 iki 33. Jeigu tarp trijų paskutinių elementų 
+// yra nors vienas ne pirminis skaičius, prie masyvo pridėkite dar 
+// vieną elementą- atsitiktinį skaičių nuo 1 iki 33. 
+// Vėl patikrinkite pradinę sąlygą ir jeigu reikia pridėkite 
+// dar vieną elementą. Kartokite, kol sąlyga nereikalaus pridėti elemento. 
+$massive = array();
+for ($i = 0; $i < 3; $i++) {
+    $massive[] = rand(1, 33);
+}
+function tikrinam($massive)
+{
+    for ($i = count($massive) - 3; $i < count($massive); $i++) {
+        if (sveikas($massive[$i]) !== 1) {
+            $massive[] = rand(1, 33);
+            tikrinam($massive);
+            break;
+        } else {
+            if ($i == count($massive) - 1) {
+                print_r($massive);
+            } else {
+                continue;
+            }
+        }
+    }
+    // return $massive;
+}
+tikrinam($massive);
+///////////////////////////////////////////
+echo '<br>10 uzduotis<br>';
+// Sugeneruokite masyvą iš 10 elementų, kurie yra masyvai iš 10 elementų, 
+// kurie yra atsitiktiniai skaičiai nuo 1 iki 100. 
+// Jeigu tokio masyvo pirminių skaičių vidurkis mažesnis už 70, 
+// suraskite masyve mažiausią skaičių (nebūtinai pirminį) ir prie jo 
+// pridėkite 3. Vėl paskaičiuokite masyvo pirminių skaičių vidurkį 
+// ir jeigu mažesnis nei 70 viską kartokite. 
+$eilute = array();
+for ($i = 0; $i < 10; $i++) {
+    $eilute[] = [];
+    for ($j = 0; $j < 10; $j++) {
+        $eilute[$i][] = rand(1, 100);
+    }
+}
+function pirminiai($eilute)
+{
+    $suma = 0;
+    $kiekis = 0;
+    foreach ($eilute as $value) {
+        foreach ($value as $number) {
+            if (sveikas($number) == 1) {
+                $kiekis++;
+                $suma += $number;
+            } else {
+                continue;
+            }
+        }
+    }
+    ziurim($suma, $kiekis, $eilute);
+    // return [$suma, $kiekis];
+}
+// function ziurim($suma, $kiekis, $eilute)
+// {
+//     $maziausias = 0;
+//     $numeris = 0;
+//     if ($suma / $kiekis < 70) {
+//         // echo $suma / $kiekis;
+//         foreach ($eilute as $key => $value) {
+//             // min($value) == min($value) + 3;
+//             if ($value > $maziausias) {
+//                 $maziausias == $value;
+//                 $numeris == $key;
+//             }
+//         }
+//         min($eilute[$key]) == min($eilute[$key]) + 3;
+//         pirminiai($eilute);
+//     } else {
+//         print_r($eilute);
+//         echo '<br>';
+//         echo $suma / $kiekis;
+//     }
 // }
+print_r(pirminiai($eilute));
