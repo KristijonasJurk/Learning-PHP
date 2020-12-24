@@ -13,7 +13,7 @@ if (isset($_POST['sodinti'])) {
         'id' => ++$_SESSION['agurku ID'],
         'agurkai' => 0
     ];
-    header('Location: http://localhost/bla/agurkai/sodinimas.php');
+    header('Location: http://localhost/nd/nd7/agurkai/sodinimas.php');
     exit;
 }
 // ISROVIMO SCENARIJUS
@@ -21,7 +21,7 @@ if (isset($_POST['rauti'])) {
     foreach ($_SESSION['a'] as $index => $agurkas) {
         if ($_POST['rauti'] == $agurkas['id']) {
             unset($_SESSION['a'][$index]);
-            header('Location: http://localhost/bla/agurkai/sodinimas.php');
+            header('Location: http://localhost/nd/nd7/agurkai/sodinimas.php');
             exit;
         }
     }
@@ -44,11 +44,12 @@ if (isset($_POST['rauti'])) {
     <h3>Sodinimas</h3>
     <form action="" method="post">
         <?php foreach ($_SESSION['a'] as $agurkas) : ?>
-
-            <div>
+            <?php $randomPhoto = rand(1, 5); ?>
+            <div style="display: flex; align-items:center; margin-bottom:30px; font-size:32px;">
+                <img style="width: 100px;" src="img/cucumbers<?php echo $randomPhoto ?>.jpg" alt="">
                 Agurkas nr. <?= $agurkas['id'] ?>
                 Agurkų: <?= $agurkas['agurkai'] ?>
-                <button type="submit" name="rauti" value="<?= $agurkas['id'] ?>">Išrauti</button>
+                <button style="margin-left:30px; width:100px; height:35px; font-size:24px; background-color:lightgreen;" type="submit" name="rauti" value="<?= $agurkas['id'] ?>">Išrauti</button>
             </div>
 
         <?php endforeach ?>
