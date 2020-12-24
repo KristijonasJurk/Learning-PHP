@@ -8,7 +8,7 @@
 </head>
 <h1 style="text-align: center; margin: 200px;">
     <a style="color: white;" href="?sodinimas">sodinimas</a>
-    <a style="margin: 100px;color: white;" href="?auginimas">auginimas</a>
+    <a style="margin: 110px;color: white;" href="?auginimas">auginimas</a>
     <a style="color: white;" href="?skynimas">skynimas</a>
 </h1>
 <style>
