@@ -42,7 +42,7 @@ if (isset($_POST['rauti'])) {
 <body style="border: 1px solid black;">
     <h1 style="text-align: center;">Agurkų sodas</h1>
     <h3 style="text-align: center; color:limegreen; font-size: 22px;">Sodinimas</h3>
-    <form action="" method="post">
+    <form style="display:flex; align-items:center; flex-direction:column;" action="" method="post">
         <?php foreach ($_SESSION['a'] as $agurkas) : ?>
             <?php $randomPhoto = rand(1, 5); ?>
             <div style="display: flex; align-items:center; margin:0 0 30px 20px; font-size:32px;">
