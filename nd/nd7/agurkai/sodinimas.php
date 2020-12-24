@@ -39,13 +39,13 @@ if (isset($_POST['rauti'])) {
 </head>
 <a href="?pagrindinis">atgal į pagrindinį</a>
 
-<body>
-    <h1>Agurkų sodas</h1>
-    <h3>Sodinimas</h3>
+<body style="border: 1px solid black;">
+    <h1 style="text-align: center;">Agurkų sodas</h1>
+    <h3 style="text-align: center; color:limegreen; font-size: 22px;">Sodinimas</h3>
     <form action="" method="post">
         <?php foreach ($_SESSION['a'] as $agurkas) : ?>
             <?php $randomPhoto = rand(1, 5); ?>
-            <div style="display: flex; align-items:center; margin-bottom:30px; font-size:32px;">
+            <div style="display: flex; align-items:center; margin:0 0 30px 20px; font-size:32px;">
                 <img style="width: 100px;" src="img/cucumbers<?php echo $randomPhoto ?>.jpg" alt="">
                 Agurkas nr. <?= $agurkas['id'] ?>
                 Agurkų: <?= $agurkas['agurkai'] ?>
@@ -53,7 +53,7 @@ if (isset($_POST['rauti'])) {
             </div>
 
         <?php endforeach ?>
-        <button type="submit" name="sodinti">SODINTI</button>
+        <button style=" margin:15px;background-color:green; color:white; width: 160px; height:35px; font-size:18px; color:white;" type="submit" name="sodinti">SODINTI</button>
     </form>
 </body>
 
