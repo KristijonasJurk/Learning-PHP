@@ -33,8 +33,10 @@ if (isset($_POST['auginti'])) {
     <h3 style="text-align: center; color:green">Auginimas</h3>
     <form style="display:flex; align-items:center; flex-direction:column;" action="" method="post">
         <?php foreach ($_SESSION['a'] as $agurkas) : ?>
+            <?php $randomPhoto = rand(1, 11); ?>
             <div style="font-size:20px;">
                 <?php $kiekis = rand(2, 9) ?>
+                <img style="width: 50px;" src="img/cucumbers<?php echo $randomPhoto ?>.jpg" alt="">
                 <h1 style="display:inline;"><?= $agurkas['agurkai'] ?></h1>
                 <h3 style="display:inline;color:green;font-size:18px;">+<?= $kiekis ?></h3>
                 <input type="hidden" name="kiekis[<?= $agurkas['id'] ?>]" value="<?= $kiekis ?>">

@@ -44,7 +44,7 @@ if (isset($_POST['rauti'])) {
     <h3 style="text-align: center; color:limegreen; font-size: 22px;">Sodinimas</h3>
     <form style="display:flex; align-items:center; flex-direction:column;" action="" method="post">
         <?php foreach ($_SESSION['a'] as $agurkas) : ?>
-            <?php $randomPhoto = rand(1, 5); ?>
+            <?php $randomPhoto = rand(1, 11); ?>
             <div style="display: flex; align-items:center; margin:0 0 30px 20px; font-size:32px;">
                 <img style="width: 100px;" src="img/cucumbers<?php echo $randomPhoto ?>.jpg" alt="">
                 Agurkas nr. <?= $agurkas['id'] ?>
