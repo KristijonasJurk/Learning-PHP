@@ -6,16 +6,36 @@ if (!isset($_SESSION['a'])) {
     $_SESSION['agurku ID'] = 0;
 }
 
+
 // SKINTI VISISKAI VISUS SCENARIJUS
 if (isset($_POST['visiskai'])) {
-    foreach ($_SESSION['a'] as $index => $agurkas) {
-        unset($_SESSION['a']);
-        $_SESSION['agurku ID'] == 0;
-        header('Location: http://localhost/nd/nd7/agurkai/skynimas.php');
-        exit;
+    foreach ($_SESSION['a'] as $index => &$agurkas) {
+        $agurkas['agurkai'] = 0;
+    }
+    // _d($_POST['kiekis']);
+    header('Location: http://localhost/nd/nd7/agurkai/skynimas.php');
+    exit;
+}
+// SKINTI VISUS SCENARIJUS
+if (isset($_POST['visus'])) {
+    foreach ($_SESSION['a'] as $index => &$agurkas) {
+        if ($_POST['visus'] == $agurkas['id']) {
+            $agurkas['agurkai'] = 0;
+            header('Location: http://localhost/nd/nd7/agurkai/skynimas.php');
+            exit;
+        }
     }
 }
-
+// SKINTI VIENA SCENARIJUS
+if (isset($_POST['viena'])) {
+    foreach ($_SESSION['a'] as $index => &$agurkas) {
+        if ($_POST['viena'] == $agurkas['id']) {
+            $agurkas['agurkai'] -= 1;
+            header('Location: http://localhost/nd/nd7/agurkai/skynimas.php');
+            exit;
+        }
+    }
+}
 
 // ISROVIMO SCENARIJUS
 if (isset($_POST['rauti'])) {
