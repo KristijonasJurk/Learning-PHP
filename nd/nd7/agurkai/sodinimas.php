@@ -21,6 +21,7 @@ if (isset($_POST['rauti'])) {
     foreach ($_SESSION['a'] as $index => $agurkas) {
         if ($_POST['rauti'] == $agurkas['id']) {
             unset($_SESSION['a'][$index]);
+            --$_SESSION['agurku ID'];
             header('Location: http://localhost/nd/nd7/agurkai/sodinimas.php');
             exit;
         }
