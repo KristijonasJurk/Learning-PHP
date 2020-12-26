@@ -31,7 +31,7 @@ if (isset($_POST['rauti'])) {
 
 
 <!DOCTYPE html>
-<html lang="en">
+<html style="background: url('./img/cucumbers10.jpg');" lang="en">
 
 <head>
     <meta charset="UTF-8">
@@ -40,7 +40,7 @@ if (isset($_POST['rauti'])) {
 </head>
 <a href="?pagrindinis">atgal į pagrindinį</a>
 
-<body style="border: 1px solid black;">
+<body style="background: white; border: 1px solid black;">
     <h1 style="text-align: center;">Agurkų sodas</h1>
     <h3 style="text-align: center; color:limegreen; font-size: 22px;">Sodinimas</h3>
     <form style="display:flex; align-items:center; flex-direction:column;" action="" method="post">
