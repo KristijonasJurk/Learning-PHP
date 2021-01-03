@@ -27,27 +27,19 @@ if (isset($_POST['visus'])) {
     }
 }
 // SKINTI VIENA SCENARIJUS
-if (isset($_POST['viena'])) {
+if (isset($_POST['skinti'])) {
     foreach ($_SESSION['a'] as $index => &$agurkas) {
-        if ($_POST['viena'] == $agurkas['id']) {
-            $agurkas['agurkai'] -= 1;
+        if ($_POST['skinti'] == $agurkas['id']) {
+
+            $agurkas['agurkai'] -= $_POST['kiekSkinti' . $agurkas['id']];
+            if ($agurkas['agurkai'] < 0) {
+                $agurkas['agurkai'] = 0;
+            }
             header('Location: http://localhost/nd/nd7/agurkai/skynimas.php');
             exit;
         }
     }
 }
-
-// ISROVIMO SCENARIJUS
-// if (isset($_POST['rauti'])) {
-//     foreach ($_SESSION['a'] as $index => $agurkas) {
-//         if ($_POST['rauti'] == $agurkas['id']) {
-//             unset($_SESSION['a'][$index]);
-//             --$_SESSION['agurku ID'];
-//             header('Location: http://localhost/nd/nd7/agurkai/skynimas.php');
-//             exit;
-//         }
-//     }
-// }
 ?>
 
 
@@ -70,7 +62,8 @@ if (isset($_POST['viena'])) {
             <div style="display: flex; align-items:center; margin:0 0 30px 20px; font-size:32px;">
                 <img style="width: 100px;" src="img/cucumbers<?php echo $randomPhoto ?>.jpg" alt="">
                 Galima skinti agurkų: <?= $agurkas['agurkai'] ?>
-                <button style="margin-left:30px; width:100px; height:35px; font-size:24px; background-color:yellow;" type="submit" name="viena" value="<?= $agurkas['id'] ?>">Skinti</button>
+                <input style="margin-left:30px; width:100px; height:35px; font-size:24px;" placeholder="kiek?" type="text" name="kiekSkinti<?= $agurkas['id'] ?>" value="<?= $_POST['kiekisSkinti' . $agurkas['id']] ?? '' ?>">
+                <button style="margin-left:30px; width:100px; height:35px; font-size:24px; background-color:yellow;" type="submit" name="skinti" value="<?= $agurkas['id'] ?>">Skinti</button>
                 <button style="margin-left:30px; width:150px; height:35px; font-size:24px; background-color:orange;" type="submit" name="visus" value="<?= $agurkas['id'] ?>">Skinti visus</button>
             </div>
 
