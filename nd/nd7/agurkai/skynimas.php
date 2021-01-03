@@ -26,14 +26,25 @@ if (isset($_POST['visus'])) {
         }
     }
 }
-// SKINTI VIENA SCENARIJUS
+// SKINTI KAŽKIEK SCENARIJUS
 if (isset($_POST['skinti'])) {
     foreach ($_SESSION['a'] as $index => &$agurkas) {
         if ($_POST['skinti'] == $agurkas['id']) {
 
-            $agurkas['agurkai'] -= $_POST['kiekSkinti' . $agurkas['id']];
             if ($agurkas['agurkai'] < 0) {
+                $_SESSION['error'] = 1;
                 $agurkas['agurkai'] = 0;
+                break;
+            }
+            if (floor($_POST['kiekSkinti' . $agurkas['id']]) != $_POST['kiekSkinti' . $agurkas['id']]) {
+                $_SESSION['error'] = 1;
+                break;
+            }
+            if ($_POST['kiekSkinti' . $agurkas['id']] < 0) {
+                $_SESSION['error'] = 1;
+                break;
+            } else {
+                $agurkas['agurkai'] -= $_POST['kiekSkinti' . $agurkas['id']];
             }
             header('Location: http://localhost/nd/nd7/agurkai/skynimas.php');
             exit;
@@ -56,6 +67,12 @@ if (isset($_POST['skinti'])) {
 <body style="background: white; border: 1px solid black;">
     <h1 style="text-align: center;">Agurkų sodas</h1>
     <h3 style="text-align: center; color:limegreen; font-size: 22px;">Skynimas</h3>
+    <?php if (isset($_SESSION['error'])) : ?>
+        <?php if (1 == $_SESSION['error']) : ?>
+            <p class="error" style="text-align: center; color:red; font-size: 22px;">⚠ Negalima nuskinti įvesto kiekio.</p>
+        <?php endif ?>
+        <?php unset($_SESSION['error']); ?>
+    <?php endif ?>
     <form style="display:flex; align-items:center; flex-direction:column;" action="" method="post">
         <?php foreach ($_SESSION['a'] as $agurkas) : ?>
             <?php $randomPhoto = rand(1, 11); ?>
