@@ -12,10 +12,20 @@ class Miskas
     }
     public function garsas()
     {
-        echo '<h1>' . $this->voice . '</h1>';
+        echo '<h1>' . $this->balsas . '</h1>';
     }
     public function plotas()
     {
         return $this->plotas;
+    }
+
+    public static $title = 'Misko giria';
+    public static function getName()
+    {
+        return self::$title;
+    }
+    public static function getStatic()
+    {
+        return static::$title;
     }
 }
