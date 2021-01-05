@@ -5,14 +5,27 @@ if (!isset($_SESSION['a'])) {
     $_SESSION['a'] = [];
     $_SESSION['agurku ID'] = 0;
 }
+include __DIR__ . '/agurkas.php';
+
 
 // SODINIMO SCENARIJUS
 if (isset($_POST['sodinti'])) {
 
-    $_SESSION['a'][] = [
-        'id' => ++$_SESSION['agurku ID'],
-        'agurkai' => 0
-    ];
+
+    foreach (range(1, $kiekis) as $_) {
+
+        $agurkoObj = new Agurkas;
+        $agurkasObj->id = $_SESSION['agurku ID'] + 1;
+        $agurkasObj->count = 0;
+        // var_dump($agurkasObj);
+        die;
+
+        $_SESSION['a'][] = [
+            'id' => ++$_SESSION['agurku ID'],
+            'agurkai' => 0
+        ];
+    }
+
     header('Location: http://localhost/nd/nd7/agurkai/sodinimas.php');
     exit;
 }
