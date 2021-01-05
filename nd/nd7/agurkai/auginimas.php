@@ -4,65 +4,75 @@ include __DIR__ . '/agurkas.php';
 include __DIR__ . '/pomidoras.php';
 session_start();
 
-if (!isset($_SESSION['a'])) {
-    $_SESSION['a'] = [];
-    $_SESSION['agurku ID'] = 0;
+if (!isset($_SESSION['agurkai']) || !isset($_SESSION['pomidorai'])) {
+    echo 'Nieko nera, pasodink ka nors.';
+    //TODO: button to sodinimas, kai nera agurku
+
+    $_SESSION['agurkai'] = [];
+    $_SESSION['darzovesID'] = 0;
 }
 
 // AUGINIMO SCENARIJUS
-if (isset($_POST['auginti'])) {
-    // foreach ($_SESSION['a'] as $index => &$agurkas) {
-    //     $agurkas['agurkai'] += $_POST['kiekis'][$agurkas['id']];
-    // }
-
-    foreach ($_SESSION['obj'] as $index => $agurkas) { // <---- serializuotas stringas
-        $agurkas = unserialize($agurkas); // <----- agurko objektas
-        $agurkas->addAgurkas($_POST['kiekis'][$agurkas->id]); // <------- pridedam agurka
-        $agurkas = serialize($agurkas); // <------ vel stringas
-        $_SESSION['obj'][$index] = $agurkas; // <----- uzsaugom agurkus
+if (isset($_POST['augintiAgurkus'])) {
+    foreach ($_SESSION['agurkai'] as $index => &$agurkas) {
+        $visasKiekis = $agurkas->getKiekis() + $_POST['kiekisAgurku'][$agurkas->getId()];
+        $agurkas->setKiekis($visasKiekis);
     }
-
-
-
-    // _d($_POST['kiekis']);
-    header('Location: http://localhost/nd/nd7/agurkai/auginimas.php');
+    header('Location: http://localhost:3000/auginimas.php');
+    exit;
+}
+if (isset($_POST['augintiPomidorus'])) {
+    foreach ($_SESSION['pomidorai'] as $index => &$pomidoras) {
+        $visasKiekis = $pomidoras->getKiekis() + $_POST['kiekisPomidoru'][$pomidoras->getId()];
+        $pomidoras->setKiekis($visasKiekis);
+    }
+    header('Location: http://localhost:3000/auginimas.php');
     exit;
 }
 
 ?>
-
 <!DOCTYPE html>
-<html style="background: url('./img/cucumbers9.jpg');" lang="en">
+<html lang="en">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>auginimas</title>
+    <title>Auginimas</title>
 </head>
-<a href="?pagrindinis">atgal į pagrindinį</a>
 
-<body style="background: white; border: 1px solid black;">
-    <h1 style="text-align: center;">Agurkų sodas</h1>
-    <h3 style="text-align: center; color:green">Auginimas</h3>
-    <form style="display:flex; align-items:center; flex-direction:column;" action="" method="post">
-        <?php foreach ($_SESSION['obj'] as $agurkas) : ?>
-            <?php $agurkas = unserialize($agurkas) ?>
-            <?php $randomPhoto = rand(1, 11); ?>
-            <div style="font-size:20px;">
-                <?php $kiekis = rand(2, 9) ?>
-                <img style="width: 50px;" src="img/cucumbers<?php echo $randomPhoto ?>.jpg" alt="">
-                <h1 style="display:inline;"><?= $agurkas->count ?></h1>
-                <h3 style="display:inline;color:green;font-size:18px;">+<?= $kiekis ?></h3>
-                <input type="hidden" name="kiekis[<?= $agurkas->id ?>]" value="<?= $kiekis ?>">
-                Agurkas Nr. <?= $agurkas->id ?>
+<body>
+    <a class="link" href="index.html">Atgal</a>
+    <!-- <h1>Agurkų sodas</h1> -->
+    <h3>Auginimas</h3>
+    <form action="" method="post">
+        <h1>Agurkai</h1>
+        <?php foreach ($_SESSION['agurkai'] as $agurkas) : ?>
+            <div>
+                <?php $kiekisAgurku = $agurkas->auginti() ?>
+                <h1 style="display:inline;"><?= $agurkas->getKiekis() ?></h1>
+                <h3 style="display:inline;color:red;">+<?= $kiekisAgurku ?></h3>
+                <input type="hidden" name="kiekisAgurku[<?= $agurkas->getId() ?>]" value="<?= $kiekisAgurku ?>">
+                Agurkas Nr. <?= $agurkas->getId() ?>
             </div>
         <?php endforeach ?>
-        <button style="margin:20px 0  10px 30px; width:100px; height:35px; font-size:24px; background-color:lightgreen;" type="submit" name="auginti">Auginti</button>
+        <button type="submit" name="augintiAgurkus">Auginti agurkus</button>
+
+        <h1>Pomidorai</h1>
+        <?php foreach ($_SESSION['pomidorai'] as $pomidoras) : ?>
+            <div>
+                <?php $kiekisPomidoru = $pomidoras->auginti() ?>
+                <h1 style="display:inline;"><?= $pomidoras->getKiekis() ?></h1>
+                <h3 style="display:inline;color:red;">+<?= $kiekisPomidoru ?></h3>
+                <input type="hidden" name="kiekisPomidoru[<?= $pomidoras->getId() ?>]" value="<?= $kiekisPomidoru ?>">
+                Pomidoras Nr. <?= $pomidoras->getId() ?>
+            </div>
+        <?php endforeach ?>
+        <button type="submit" name="augintiPomidorus">Auginti pomidorus</button>
+
     </form>
 </body>
 
 </html>
-
 <?php
 
 if (isset($_GET['pagrindinis'])) {
