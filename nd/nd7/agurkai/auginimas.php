@@ -6,11 +6,18 @@ if (!isset($_SESSION['a'])) {
     $_SESSION['agurku ID'] = 0;
 }
 
+include __DIR__ . '/agurkas.php';
+
 // AUGINIMO SCENARIJUS
 if (isset($_POST['auginti'])) {
     foreach ($_SESSION['a'] as $index => &$agurkas) {
         $agurkas['agurkai'] += $_POST['kiekis'][$agurkas['id']];
     }
+
+
+
+
+
     // _d($_POST['kiekis']);
     header('Location: http://localhost/nd/nd7/agurkai/auginimas.php');
     exit;
