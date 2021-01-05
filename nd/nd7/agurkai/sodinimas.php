@@ -2,7 +2,7 @@
 session_start();
 
 if (!isset($_SESSION['a'])) {
-    $_SESSION['a'] = [];
+    // $_SESSION['a'] = [];
     $_SESSION['obj'] = []; // agurko objektai
     $_SESSION['agurku ID'] = 0;
 }
@@ -26,18 +26,19 @@ if (isset($_POST['sodinti'])) {
 
     foreach (range(1, $kiekis) as $_) {
 
-        $agurkasObj = new Agurkas;
-        $agurkasObj->id = $_SESSION['agurku ID'] + 1;
-        $agurkasObj->count = 0;
+        $agurkasObj = new Agurkas($_SESSION['agurku ID']);
+        // $agurkasObj->id = $_SESSION['agurku ID'] + 1;
+        // $agurkasObj->count = 0;
 
         $_SESSION['obj'][] = serialize($agurkasObj);
+        $_SESSION['agurku ID']++;
         // var_dump($agurkasObj);
         // die;
 
-        $_SESSION['a'][] = [
-            'id' => ++$_SESSION['agurku ID'],
-            'agurkai' => 0
-        ];
+        // $_SESSION['a'][] = [
+        //     'id' => ++$_SESSION['agurku ID'],
+        //     'agurkai' => 0
+        // ];
     }
 
     header('Location: http://localhost/nd/nd7/agurkai/sodinimas.php');
@@ -45,10 +46,18 @@ if (isset($_POST['sodinti'])) {
 }
 // ISROVIMO SCENARIJUS
 if (isset($_POST['rauti'])) {
-    foreach ($_SESSION['a'] as $index => $agurkas) {
-        if ($_POST['rauti'] == $agurkas['id']) {
-            unset($_SESSION['a'][$index], $_SESSION['obj'][$index]);
-            --$_SESSION['agurku ID'];
+    // foreach ($_SESSION['a'] as $index => $agurkas) {
+    //     if ($_POST['rauti'] == $agurkas['id']) {
+    //         unset($_SESSION['a'][$index], $_SESSION['obj'][$index]);
+    //         --$_SESSION['agurku ID'];
+    //         header('Location: http://localhost/nd/nd7/agurkai/sodinimas.php');
+    //         exit;
+    //     }
+    // }
+    foreach ($_SESSION['obj'] as $index => $agurkas) {
+        $agurkas = unserialize($agurkas);
+        if ($_POST['rauti'] == $agurkas->id) {
+            unset($_SESSION['obj'][$index]);
             header('Location: http://localhost/nd/nd7/agurkai/sodinimas.php');
             exit;
         }
@@ -77,8 +86,8 @@ if (isset($_POST['rauti'])) {
             <div style="display: flex; align-items:center; margin:0 0 30px 20px; font-size:32px;">
                 <img style="width: 100px;" src="img/cucumbers<?php echo $randomPhoto ?>.jpg" alt="">
                 Agurkas nr. <?= $agurkas->id ?>
-                Agurkų: <?= $agurkas['agurkai'] ?>
-                <button style="margin-left:30px; width:100px; height:35px; font-size:24px; background-color:lightgreen;" type="submit" name="rauti" value="<?= $agurkas['id'] ?>">Išrauti</button>
+                Agurkų: <?= $agurkas->count ?>
+                <button style="margin-left:30px; width:100px; height:35px; font-size:24px; background-color:lightgreen;" type="submit" name="rauti" value="<?= $agurkas->id ?>">Išrauti</button>
             </div>
 
         <?php endforeach ?>
