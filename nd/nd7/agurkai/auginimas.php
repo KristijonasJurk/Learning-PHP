@@ -1,12 +1,13 @@
 <?php
+include __DIR__ . '/darzove.php';
+include __DIR__ . '/agurkas.php';
+include __DIR__ . '/pomidoras.php';
 session_start();
 
 if (!isset($_SESSION['a'])) {
     $_SESSION['a'] = [];
     $_SESSION['agurku ID'] = 0;
 }
-
-include __DIR__ . '/agurkas.php';
 
 // AUGINIMO SCENARIJUS
 if (isset($_POST['auginti'])) {
