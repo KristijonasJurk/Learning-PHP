@@ -73,10 +73,10 @@ if (isset($_POST['augintiPomidorus'])) {
 </body>
 
 </html>
-
+<?php
 if (isset($_GET['pagrindinis'])) {
-header('Location: http://localhost/nd/nd7/agurkai/pagrindinis.php');
-die;
+    header('Location: http://localhost/nd/nd7/agurkai/pagrindinis.php');
+    die;
 }
 
 ?>
